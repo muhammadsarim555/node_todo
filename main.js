@@ -1,10 +1,10 @@
-const { mongoose } = require("./db/mongoose");
+const { mongoose } = require("./server/db/mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { ObjectID } = require("mongodb");
 
-const { Todo } = require("./models/todo");
-const { User } = require("./models/user");
+const { Todo } = require("./server/models/todo");
+const { User } = require("./server/models/user");
 
 const port = process.env.PORT || 3000;
 
@@ -53,6 +53,7 @@ app.post("/todos", (req, res) => {
 //     })
 //     .catch(e => res.status(404).send());
 // });
-
+//
 // app.listen(port, () => console.log("App is working on 3000"));
+
 app.set("port", process.env.PORT || 3000);
