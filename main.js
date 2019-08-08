@@ -33,6 +33,12 @@ app.post("/todos", (req, res) => {
     .catch(e => res.status(400).send(e));
 });
 
+app.get("/fetch", (req, res) => {
+  Todo.find()
+    .then(s => console.log(s))
+    .catch(e => console.log(e));
+});
+
 // app.get("/todos/:id", (req, res) => {
 //   // Todo.find()
 //   //   .then(s => res.status(200).send(s))
