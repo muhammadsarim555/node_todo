@@ -62,4 +62,4 @@ app.get("/fetch", (req, res) => {
 //
 // app.listen(port, () => console.log("App is working on 3000"));
 
-app.set("port", process.env.PORT || 3000);
+app.listen(port || 3000);
