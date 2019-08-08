@@ -39,6 +39,18 @@ app.get("/fetch", (req, res) => {
     .catch(e => console.log(e));
 });
 
+app.get("/", (req, res) => {
+  Todo.find({}, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(docs, "LLL");
+    }
+    // res.send('index',{docs:docs});
+  });
+  //res.send('test');
+});
+
 // app.get("/todos/:id", (req, res) => {
 //   // Todo.find()
 //   //   .then(s => res.status(200).send(s))
