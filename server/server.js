@@ -2,6 +2,7 @@ const { mongoose } = require("./db/mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { ObjectID } = require("mongodb");
+const _ = require("lodash");
 
 const { Todo } = require("./models/todo");
 const { User } = require("./models/user");
@@ -33,6 +34,32 @@ app.post("/todos", (req, res) => {
     .catch(e => res.status(400).send(e));
 });
 
+
+// 
+app.post("/users", (req, res) => {
+  let body = _.pick(req.body, ["email", "password"]);
+  let user = new User(body)
+
+  user.save().then(s => res.send(s))
+    .catch(e => res.status(400).send(e))
+})
+
+
+// 
+app.get("/", (req, res) => {
+  Todo.find({}, (err, docs) => {
+    if (err) {
+      res.status(400).send(err);
+      console.log(err);
+    } else {
+      res.status(200).send(docs);
+      // console.log(docs, "LLL");
+    }
+    // res.send('index',{docs:docs});
+  });
+  //res.send('test');
+});
+
 // app.get("/todos/:id", (req, res) => {
 //   // Todo.find()
 //   //   .then(s => res.status(200).send(s))
@@ -55,4 +82,5 @@ app.post("/todos", (req, res) => {
 // });
 
 // app.listen(port, () => console.log("App is working on 3000"));
-app.set("port", process.env.PORT || 3000);
+// app.set("port", process.env.PORT || 3000);
+app.listen(3000);
